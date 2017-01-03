@@ -9,14 +9,16 @@ import java.util.Random;
 import java.util.Set;
 
 /**
- * Created by acer on 30.12.2016.
+ * Created by Kamil Khadiev on 30.12.2016.
  */
 public class RandomGrid extends GridGenerator {
     @Override
     protected void generate(GeneratorParams params) {
         Random rnd = new Random(30122016L);
         GridGeneratorParams gridParams = (GridGeneratorParams) params;
-        int n = rnd.nextInt(gridParams.getMaxn() - gridParams.getMinn()) + gridParams.getMinn();
+
+        int n = (gridParams.getMaxn() - gridParams.getMinn()> 0) ? rnd.nextInt(gridParams.getMaxn() - gridParams.getMinn()) : 0;
+        n+= gridParams.getMinn();
         int maxk = gridParams.getMaxk();
         int mink = gridParams.getMink();
 
