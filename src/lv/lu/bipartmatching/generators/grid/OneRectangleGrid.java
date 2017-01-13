@@ -8,6 +8,14 @@ import java.util.*;
  * Created by Kamil Khadiev on 30.12.2016.
  */
 public class OneRectangleGrid extends GridGenerator {
+
+    public OneRectangleGrid() {
+    }
+
+    public OneRectangleGrid(int havePerfectMatching) {
+        super(havePerfectMatching);
+    }
+
     @Override
     protected void generate(GeneratorParams params) {
         Random rnd = new Random(30122016L);

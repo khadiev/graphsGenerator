@@ -51,30 +51,30 @@ public class Main {
         params = new ArrayList<>();
         addGenerator(new RandomGrid(), new GridGeneratorParams(10, 5, 30, 15, 5));
         for (int i = 0; i < 10; i++)
-            addGenerator(new OneRectangleGrid(), new GridGeneratorParams(10+(i*30), 5+(i*30), 30, 15, 5));
-        for (int i = 0; i < 3; i++) {
-            int maxn = 10+(i*60);
-            int minn = 5+(i*60);
-            int jStep = Math.max(1,minn/5/5);
-            int maxk = Math.max(maxn*maxn/10,1);
-            for (int j = 1; j < minn/5+1; j+=jStep)
-                addGenerator(new OneRaggedEdgesFigureGrid(), new GridGeneratorParams(maxn, minn, maxn*maxn/2, maxk, 5, j));
-        }
-
-        for (int i = 0; i < 3; i++) {
-            int maxn = 10+(i*60);
-            int minn = 5+(i*60);
-            int jStep = Math.max(1,minn/5/5);
-            int maxk = Math.max(maxn*maxn/10,1);
-            for (int j = 1; j < minn/5+1; j+=jStep) {
-                int maxh = Math.max(Math.min(5, maxk/10),1);
-                for (int h = 1; h <= maxh; h++) {
-                    int maxsh = Math.max(Math.min(3, maxk/70),1);
-                    for (int sh = 1; sh <= maxsh; sh++)
-                        addGenerator(new OneRaggedEdgesFigureWithHolesGrid(), new GridGeneratorParams(maxn, minn, maxn * maxn / 2, maxk, 5, j, h, sh));
-                }
-            }
-        }
+            addGenerator(new OneRectangleGrid(1), new GridGeneratorParams(10+(i*30), 5+(i*30), 30, 15, 5));
+//        for (int i = 0; i < 3; i++) {
+//            int maxn = 10+(i*60);
+//            int minn = 5+(i*60);
+//            int jStep = Math.max(1,minn/5/5);
+//            int maxk = Math.max(maxn*maxn/10,1);
+//            for (int j = 1; j < minn/5+1; j+=jStep)
+//                addGenerator(new OneRaggedEdgesFigureGrid(), new GridGeneratorParams(maxn, minn, maxn*maxn/2, maxk, 5, j));
+//        }
+//
+//        for (int i = 0; i < 3; i++) {
+//            int maxn = 10+(i*60);
+//            int minn = 5+(i*60);
+//            int jStep = Math.max(1,minn/5/5);
+//            int maxk = Math.max(maxn*maxn/10,1);
+//            for (int j = 1; j < minn/5+1; j+=jStep) {
+//                int maxh = Math.max(Math.min(5, maxk/10),1);
+//                for (int h = 1; h <= maxh; h++) {
+//                    int maxsh = Math.max(Math.min(3, maxk/70),1);
+//                    for (int sh = 1; sh <= maxsh; sh++)
+//                        addGenerator(new OneRaggedEdgesFigureWithHolesGrid(), new GridGeneratorParams(maxn, minn, maxn * maxn / 2, maxk, 5, j, h, sh));
+//                }
+//            }
+//        }
 
     }
 

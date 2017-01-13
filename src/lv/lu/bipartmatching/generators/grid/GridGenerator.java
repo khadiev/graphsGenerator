@@ -1,5 +1,6 @@
 package lv.lu.bipartmatching.generators.grid;
 
+import lv.lu.bipartmatching.generators.BipartiteGraphEdgesList;
 import lv.lu.bipartmatching.generators.GeneratorConstants;
 import lv.lu.bipartmatching.generators.GeneratorParams;
 import lv.lu.bipartmatching.generators.GraphGenerator;
@@ -13,6 +14,13 @@ import java.util.*;
 public abstract class GridGenerator extends GraphGenerator {
     private int gridSize;
     private List<Point> graph;
+
+    public GridGenerator(int havePerfectMatching) {
+        super(havePerfectMatching);
+    }
+
+    public GridGenerator() {
+    }
 
     protected List<Point> getGraph() {
         return graph;
@@ -135,5 +143,57 @@ public abstract class GridGenerator extends GraphGenerator {
         }
     }
 
+    private int[] dx = new int[]{+1,-1, 0, 0};
+    private int[] dy = new int[]{ 0, 0,+1,-1};
 
+    @Override
+    protected BipartiteGraphEdgesList getBipartiteGraphEdgesList() {
+        BipartiteGraphEdgesList edges = new BipartiteGraphEdgesList();
+
+        List<Point> g = getGraph();
+        int max = 0;
+        for (Point p : g){
+            max = (int)Math.max(max, p.getX());
+            max = (int)Math.max(max, p.getY());
+        }
+        max++;
+
+        int[][] grid = new int[max][max];
+        int[][] grid_ids = new int[max][max];
+        int n = 0;
+        int m = 0;
+        int k = 0;
+        for (int i = 0; i < g.size(); i++) {
+            Point p = g.get(i);
+            if ((p.getX() + p.getY())% 2 == 0) {
+                n++;
+                grid[(int)p.getX()][(int)p.getY()] = n;
+            }
+            else {
+                m++;
+                grid[(int)p.getX()][(int)p.getY()] = m;
+            }
+            grid_ids[(int)p.getX()][(int)p.getY()] = i;
+        }
+
+        edges.setN(n);
+        edges.setM(m);
+
+
+        for (int i = 0; i<max; i++)
+            for (int j = 0; j < max; j++)
+                if (grid[i][j]>0 && ((i+j) % 2 == 0)) {
+                    for (int q = 0; q<4; q++) {
+                        if (i+dx[q]>=0 && i+dx[q]<max && j+dy[q]>=0 && j+dy[q]<max )
+                            edges.addEdge(grid[i][j], grid[i+dx[q]][j+dy[q]], grid_ids[i][j], grid_ids[i+dx[q]][j+dy[q]]);
+                    }
+                }
+
+        return edges;
+    }
+
+    @Override
+    protected void removeVertex(int id) {
+        getGraph().remove(id);
+    }
 }
