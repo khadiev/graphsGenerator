@@ -11,7 +11,7 @@ import java.util.Queue;
  * Created by Kamil Khadiev on 30.12.2016.
  */
 public abstract class GraphGenerator {
-    int havePerfectMatching = 0; //0 is "does not metter", 1 is "yes", 2 is "no"
+    protected int havePerfectMatching = 0; //0 is "does not metter", 1 is "yes", 2 is "no"
 
     public GraphGenerator() {
         this(0);
@@ -48,10 +48,10 @@ public abstract class GraphGenerator {
         edges = getBipartiteGraphEdgesList();
 
         for (int i = 0; i < edges.getN(); i++)
-            edges.addEdge(edges.getNM(), i-edges.getN(), -1, edges.getVertexId(i), 1);
+            edges.addEdge(edges.getNM() + 1, i-edges.getN()+1, -1, edges.getVertexId(i), 1);
 
         for (int i = edges.getN(); i < edges.getNM(); i++)
-            edges.addEdge(i, edges.getNM()+1-edges.getN(), edges.getVertexId(i), -1, 1);
+            edges.addEdge(i+1, edges.getNM()+1-edges.getN()+1, edges.getVertexId(i), -1, 1);
 
         s = edges.getNM();
         t = edges.getNM()+1;
@@ -78,7 +78,7 @@ public abstract class GraphGenerator {
     private BipartiteGraphEdgesList edges;
 
     private boolean bfs() {
-
+        q = new ArrayDeque<>();
         q.add(s);
         Arrays.fill(d, -1);
         d[s] = 0;
@@ -99,7 +99,7 @@ public abstract class GraphGenerator {
         if (flow == 0)  return 0;
         if (v == t)  return flow;
         int to;
-        for (; ptr[v]<n; ++ptr[v]) {
+        for (; ptr[v]< edges.getNeighbors(v).size(); ++ptr[v]) {
             BipartiteGraphEdgesList.Edge e = edges.getNeighbors(v).get(ptr[v]);
             to = e.getB();
             if (d[to] != d[v] + 1)  continue;

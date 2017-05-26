@@ -30,7 +30,7 @@ public class Main {
 
             String tString = "" + (t + startT);
             while (tString.length() < 3) tString = "0" + tString;
-            PrintWriter out = new PrintWriter("result/grids/grid" + tString + ".txt");
+            PrintWriter out = new PrintWriter("result/eatenGrids/grid" + tString + ".txt");
 
 
             generator.generateAndOut(out, param);
@@ -50,8 +50,8 @@ public class Main {
         generators = new ArrayList<>();
         params = new ArrayList<>();
         addGenerator(new RandomGrid(), new GridGeneratorParams(10, 5, 30, 15, 5));
-        for (int i = 0; i < 10; i++)
-            addGenerator(new OneRectangleGrid(1), new GridGeneratorParams(10+(i*30), 5+(i*30), 30, 15, 5));
+//        for (int i = 0; i < 10; i++)
+//            addGenerator(new OneRectangleGrid(1), new GridGeneratorParams(10+(i*30), 5+(i*30), 30, 15, 5));
 //        for (int i = 0; i < 3; i++) {
 //            int maxn = 10+(i*60);
 //            int minn = 5+(i*60);
@@ -75,6 +75,26 @@ public class Main {
 //                }
 //            }
 //        }
+
+//        for (int havePerfectMatching = 0; havePerfectMatching>-1; havePerfectMatching--) {
+//            for (int i = 0; i < 1; i++)
+//                for (int ways = 1; ways<2+1; ways++) {
+//                    for (int h = 1; h<2+1; h++)
+//                        for (int w = 1; w<3+1; w++)
+//                            addGenerator(new EatenGridGenerator(havePerfectMatching), new GridGeneratorParams(10 + (i * 30), 9 + (i * 30), 30, 15, w*h*ways, w, ways));
+//                }
+//
+//        }
+
+        for (int havePerfectMatching = 1; havePerfectMatching>-1; havePerfectMatching--) {
+            for (int i = 0; i < 2+1; i++)
+                for (int ways = 1; ways<3+1; ways++) {
+                    for (int h = 1; h<3+1; h++)
+                        for (int w = 1; w<3+1; w++)
+                            addGenerator(new EatenGridGenerator(havePerfectMatching), new GridGeneratorParams(50 + (i * 30), 30 + (i * 30), 30, 15, w*h*ways, w, ways));
+            }
+
+        }
 
     }
 

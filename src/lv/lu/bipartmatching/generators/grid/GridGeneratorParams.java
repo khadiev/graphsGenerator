@@ -14,6 +14,9 @@ public class GridGeneratorParams extends GeneratorParams {
     private int bridgeWidth;
     private int holesNumbers;
     private int sizeOfHole;
+    private int eatenCellsNumber;
+    private int eatenDeapth;
+    private int eatenWaysNumber;
 
 
     public GridGeneratorParams(int maxn, int minn, int maxk, int mink, int distanceBetweenComponents) {
@@ -42,6 +45,16 @@ public class GridGeneratorParams extends GeneratorParams {
         this.bridgeWidth = bridgeWidth;
         this.holesNumbers = holesNumbers;
         this.sizeOfHole = sizeOfHole;
+    }
+
+    public GridGeneratorParams(int maxn, int minn, int maxk, int mink, int eatenCellsNumber, int eatenDeapth, int eatenWaysNumber) {
+        this.maxn = maxn;
+        this.minn = minn;
+        this.maxk = maxk;
+        this.mink = mink;
+        this.eatenCellsNumber = eatenCellsNumber;
+        this.eatenDeapth = eatenDeapth;
+        this.eatenWaysNumber = eatenWaysNumber;
     }
 
     public int getMaxn() {
@@ -106,5 +119,29 @@ public class GridGeneratorParams extends GeneratorParams {
 
     public void setSizeOfHole(int sizeOfHole) {
         this.sizeOfHole = sizeOfHole;
+    }
+
+    public int getEatenCellsNumber() {
+        return eatenCellsNumber;
+    }
+
+    public void setEatenCellsNumber(int eatenCellsNumber) {
+        this.eatenCellsNumber = eatenCellsNumber;
+    }
+
+    public int getEatenDeapth() {
+        return eatenDeapth;
+    }
+
+    public void setEatenDeapth(int eatenDeapth) {
+        this.eatenDeapth = eatenDeapth;
+    }
+
+    public int getEatenWaysNumber() {
+        return eatenWaysNumber;
+    }
+
+    public void setEatenWaysNumber(int eatenWaysNumber) {
+        this.eatenWaysNumber = eatenWaysNumber;
     }
 }

@@ -8,26 +8,27 @@ import java.util.StringTokenizer;
  */
 public class GraphVisualization {
     public static void main(String[] args) throws IOException {
-        int n = 204-24+1;
-        int startT = 24;
-        int log_step_size = 1;
+
+        int startT = 1;
+        int n = 162-startT+1;
+        int log_step_size = 10;
         for (int i = 0; i <n; i++){
             int t = i;
 
             String tString = "" + (t + startT);
             while (tString.length() < 3) tString = "0" + tString;
-            BufferedReader in = new BufferedReader(new FileReader("result/grids/grid" + tString + ".txt"));
+            BufferedReader in = new BufferedReader(new FileReader("result/eatenGrids/grid" + tString + ".txt"));
 
-            PrintWriter out = new PrintWriter("result/visual/grid" + tString + ".txt");
+            PrintWriter out = new PrintWriter("result/eatenVisual/grid" + tString + ".txt");
 
             printFile(in,out);
             out.close();
             in.close();
             if (i % log_step_size == 0){
-                System.out.println("test " + i + " finished");
+                System.out.println("test " + i + " is finished");
             }
         }
-        System.out.println("test " + (n-1) + " finished");
+        System.out.println("All " + (n-1) + " tests are finished (" + (startT-1) +"-based numiraion)");
     }
 
     private static void printFile(BufferedReader in, PrintWriter out) throws IOException {
